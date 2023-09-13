@@ -293,6 +293,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <button id="scrollToTopBtn" class="btn btn-secondary rounded-circle" title="Go to top">
         <i class="fas fa-arrow-up"></i>
@@ -344,6 +346,31 @@
         window.addEventListener('resize', setCardHeights);
 
     </script>
+
+    <script>
+    $(document).ready(function () {
+        // Smooth scrolling for all links with the 'nav-link' class
+        $(".nav-link").on("click", function (event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+
+                var hash = this.hash;
+
+                // Calculate the offset of the target element
+                var targetOffset = $(hash).offset().top;
+
+                // Animate the scroll with a sliding effect
+                $("html, body").animate(
+                    {
+                        scrollTop: targetOffset,
+                    },
+                    800, // Adjust the duration as needed (in milliseconds)
+                    "swing" // You can change the easing function if desired
+                );
+            }
+        });
+    });
+</script>
 
 </body>
 
