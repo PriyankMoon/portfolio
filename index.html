@@ -10,11 +10,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        
+        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap');
+        @import url('https://unpkg.com/css.gg@2.0.0/icons/css/attachment.css');
+
+        body {
+            font-family: cursive;
+        }
+
         #twits {
             mix-blend-mode: color-burn;
         }
-        
+
+        #my_img {
+            mix-blend-mode: darken;
+            max-height: 50vh;
+            max-width: 75vw;
+        }
+
         #scrollToTopBtn {
             display: none;
             position: fixed;
@@ -31,33 +44,443 @@
         #box img {
             height: 100%;
             width: 100%;
+            -o-object-fit: cover;
             object-fit: cover;
+            -webkit-transition: all ease 1s;
+            -o-transition: all ease 1s;
             transition: all ease 1s;
         }
 
         #box:hover img {
-            scale: 1.06;
+            scale: 1.15;
         }
-        #items{
-            margin:40px 0 40px 0;
-            display:flexbox;
+
+        #items {
+            margin: 40px 0 40px 0;
+            display: flexbox;
+            -ms-flex-negative: initial;
             flex-shrink: initial;
         }
-        
-        .image{
+
+        .image {
             height: 20em;
         }
-        .col-md-4{
+
+        .col-md-4 {
             min-width: 200px;
+            -webkit-transition: all ease 0.5s;
+            -o-transition: all ease 0.5s;
             transition: all ease 0.5s;
         }
-        .col-md-4:hover{
+
+        .col-md-4:hover {
             min-width: 200px;
             scale: 1.1;
         }
-        .row{
+
+        .card {
+            min-width: 100px;
+        }
+
+        .row {
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
+        }
+
+        .project-scroll-container {
+            overflow-x: scroll;
+            /* Enable horizontal scrolling */
+            white-space: nowrap;
+            /* Prevent line breaks */
+            padding: 20px 0;
+            /* Add some padding for spacing */
+        }
+
+        /* Style individual project cards (optional) */
+        .project-card {
+            display: inline-block;
+            /* Display project cards in a row */
+            margin-right: 20px;
+            /* Add some spacing between cards */
+            width: 55vw;
+            height: 35em;
+        }
+
+        .project-description {
+            overflow: visible;
+            /* Text will wrap to the next line */
+            white-space: normal;
+            font-size: 0.8em;
+            /* Text won't be forced to stay on one line */
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            /* Set the navbar to fixed position */
+            top: 0;
+            /* Position the navbar at the top of the page */
+            width: 100%;
+            /* Full width */
+        }
+
+        /* Links inside the navbar */
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change background on mouse-over */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            /* Ensure the navbar is on top */
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+            /* Establish a positioning context */
+        }
+
+        .navbar-nav .nav-link::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            /* Adjust the underline thickness as needed */
+            background-color: white;
+            bottom: 0.5px;
+            /* Adjust this value to control the space between text and underline */
+            left: 0;
+            -webkit-transform: scaleX(0);
+                -ms-transform: scaleX(0);
+                    transform: scaleX(0);
+            -webkit-transform-origin: 0 0;
+                -ms-transform-origin: 0 0;
+                    transform-origin: 0 0;
+            -webkit-transition: -webkit-transform 0.1s ease-in-out;
+            transition: -webkit-transform 0.1s ease-in-out;
+            -o-transition: transform 0.1s ease-in-out;
+            transition: transform 0.1s ease-in-out;
+            transition: transform 0.1s ease-in-out, -webkit-transform 0.3s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover::before {
+            -webkit-transform: scaleX(1);
+                -ms-transform: scaleX(1);
+                    transform: scaleX(1);
+        }
+
+        .main {
+            margin-top: 30px;
+            /* Add a top margin to avoid content overlay */
+        }
+
+        .container {
+            padding-top: 30px;
+        }
+
+
+        .card-text {
+            text-wrap: wrap;
+        }
+
+        .animate-left {
+            opacity: 1;
+            -webkit-transform: translateX(-50%);
+                -ms-transform: translateX(-50%);
+                    transform: translateX(-50%);
+            -webkit-transition: opacity 0.6s ease, -webkit-transform 0.6s ease;
+            transition: opacity 0.6s ease, -webkit-transform 0.6s ease;
+            -o-transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease, -webkit-transform 0.6s ease;
+        }
+
+        .animate-left.animated {
+            opacity: 1;
+            -webkit-transform: translateX(0);
+                -ms-transform: translateX(0);
+                    transform: translateX(0);
+        }
+
+        /*heading*/
+        h2 {
+            font-size: 3em;
+            text-indent: 0%;
+            /* i like this feature  */
+        }
+
+        @-webkit-keyframes square-animation {
+            0% {
+                left: 0;
+                top: 0;
+            }
+
+            10.5% {
+                left: 0;
+                top: 0;
+            }
+
+            12.5% {
+                left: 32px;
+                top: 0;
+            }
+
+            23% {
+                left: 32px;
+                top: 0;
+            }
+
+            25% {
+                left: 64px;
+                top: 0;
+            }
+
+            35.5% {
+                left: 64px;
+                top: 0;
+            }
+
+            37.5% {
+                left: 64px;
+                top: 32px;
+            }
+
+            48% {
+                left: 64px;
+                top: 32px;
+            }
+
+            50% {
+                left: 32px;
+                top: 32px;
+            }
+
+            60.5% {
+                left: 32px;
+                top: 32px;
+            }
+
+            62.5% {
+                left: 32px;
+                top: 64px;
+            }
+
+            73% {
+                left: 32px;
+                top: 64px;
+            }
+
+            75% {
+                left: 0;
+                top: 64px;
+            }
+
+            85.5% {
+                left: 0;
+                top: 64px;
+            }
+
+            87.5% {
+                left: 0;
+                top: 32px;
+            }
+
+            98% {
+                left: 0;
+                top: 32px;
+            }
+
+            100% {
+                left: 0;
+                top: 0;
+            }
+        }
+
+        @keyframes square-animation {
+            0% {
+                left: 0;
+                top: 0;
+            }
+
+            10.5% {
+                left: 0;
+                top: 0;
+            }
+
+            12.5% {
+                left: 32px;
+                top: 0;
+            }
+
+            23% {
+                left: 32px;
+                top: 0;
+            }
+
+            25% {
+                left: 64px;
+                top: 0;
+            }
+
+            35.5% {
+                left: 64px;
+                top: 0;
+            }
+
+            37.5% {
+                left: 64px;
+                top: 32px;
+            }
+
+            48% {
+                left: 64px;
+                top: 32px;
+            }
+
+            50% {
+                left: 32px;
+                top: 32px;
+            }
+
+            60.5% {
+                left: 32px;
+                top: 32px;
+            }
+
+            62.5% {
+                left: 32px;
+                top: 64px;
+            }
+
+            73% {
+                left: 32px;
+                top: 64px;
+            }
+
+            75% {
+                left: 0;
+                top: 64px;
+            }
+
+            85.5% {
+                left: 0;
+                top: 64px;
+            }
+
+            87.5% {
+                left: 0;
+                top: 32px;
+            }
+
+            98% {
+                left: 0;
+                top: 32px;
+            }
+
+            100% {
+                left: 0;
+                top: 0;
+            }
+        }
+
+        .loader {
+            position: relative;
+            width: 96px;
+            margin: 35vh 0 0 45.5vw;
+            height: 96px;
+            text-align: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                    transform: rotate(45deg);
+        }
+
+        .loader-square {
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            width: 28px;
+            height: 28px;
+            margin: 2px;
+            border-radius: 0px;
+            background: rgb(0, 0, 0);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            -webkit-animation: square-animation 10s ease-in-out infinite both;
+                    animation: square-animation 10s ease-in-out infinite both;
+        }
+
+        .loader-square:nth-of-type(0) {
+            -webkit-animation-delay: 0s;
+                    animation-delay: 0s;
+        }
+
+        .loader-square:nth-of-type(1) {
+            -webkit-animation-delay: -1.4285714286s;
+                    animation-delay: -1.4285714286s;
+        }
+
+        .loader-square:nth-of-type(2) {
+            -webkit-animation-delay: -2.8571428571s;
+                    animation-delay: -2.8571428571s;
+        }
+
+        .loader-square:nth-of-type(3) {
+            -webkit-animation-delay: -4.2857142857s;
+                    animation-delay: -4.2857142857s;
+        }
+
+        .loader-square:nth-of-type(4) {
+            -webkit-animation-delay: -5.7142857143s;
+                    animation-delay: -5.7142857143s;
+        }
+
+        .loader-square:nth-of-type(5) {
+            -webkit-animation-delay: -7.1428571429s;
+                    animation-delay: -7.1428571429s;
+        }
+
+        .loader-square:nth-of-type(6) {
+            -webkit-animation-delay: -8.5714285714s;
+                    animation-delay: -8.5714285714s;
+        }
+
+        .loader-square:nth-of-type(7) {
+            -webkit-animation-delay: -10s;
+                    animation-delay: -10s;
+        }
+
+        .greet {
+            text-align: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            margin: 35vh 0 0 0;
+            color: #000000;
+            text-shadow: purple 0 0 12px;
+            font-size: 3em;
+            font-family: 'Abril Fatface', serif;
         }
     </style>
 </head>
@@ -82,6 +505,9 @@
                     <a class="nav-link" href="#programming-skills">Skills</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#certificates">Certificate</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#contact">Contact</a>
                 </li>
                 <li class="nav-item">
@@ -91,200 +517,336 @@
         </div>
     </nav>
 
+    <div class="loader">
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+        <div class="loader-square"></div>
+    </div>
+    <script>
+        // Function to hide the loader and show the content
+        function hideLoader() {
+            document.querySelector('.loader').style.display = 'none'; // Hide the loader
+            document.body.style.overflowY = 'auto'; // Allow scrolling
+        }
 
+        // Set a timeout to hide the loader after 3 seconds (3000 milliseconds)
+        setTimeout(hideLoader, 1300);
+    </script>
+
+    <div class="greet">Welcome To My Portfolio !</div>
+    <script>
+        const greetDiv = document.querySelector('.greet');
+
+        setTimeout(function () {
+            // Hide the greet div after 3.5 seconds
+            greetDiv.style.display = 'none';
+
+            setTimeout(function () {
+                // Show the greet div for 2 seconds
+                greetDiv.style.display = 'block';
+
+                setTimeout(function () {
+                    // Hide the greet div forever
+                    greetDiv.style.display = 'none';
+                }, 1400);
+            }, 1400);
+        }, 0);
+    </script>
+
+     <div class="main">
     <section id="about" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h2>About Me</h2>
-                    <p
-                        style="font-size: larger; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-                        Hello! I'm Priyank Dilip Moon, a passionate and dedicated third-year student pursuing a B.Tech
-                        in Computer Science and Engineering at KDK College of Engineering. I'm on a journey to hone my
-                        skills in every aspect of software engineering, and I'm excited to share my experiences and
-                        projects with you through this portfolio.</p>
-                </div>
-                <div class="col-lg-6" id="box">
-                    <img src="https://github.com/PriyankMoon/portfolio/blob/main/Firefly%2020230821154184.png?raw=true" id="my_img" alt="my_pic" class="img-fluid" style="height: 400px; width: 350px; ">
+            <div class="container">
+                <h2 style="text-align: center;">About Me</h2>
+                <br>
+                <div class="row">
+
+                    <div class="col-lg-6">
+
+                        <br>
+                        <p
+                            style="line-height: 25pt; word-spacing: 10px; font-size: larger; font-weight: 200; color: #333;">
+                            Hello! I'm Priyank Dilip Moon, a passionate and dedicated third-year student pursuing a
+                            B.Tech
+                            in Computer Science and Engineering at KDK College of Engineering. I'm on a journey to hone
+                            my
+                            skills in every aspect of software engineering, and I'm excited to share my experiences and
+                            projects with you through this portfolio.</p>
+                    </div>
+                    <div class="col-lg-" id="box">
+                        <img src="https://media.licdn.com/dms/image/D4D03AQF7l8C0KPI-OA/profile-displayphoto-shrink_800_800/0/1694271390894?e=1700092800&v=beta&t=2WNHVsYq4gK9hCK5DN_0x9kFLYaRzMbd2OsP8p2S6FE"
+                            id="my_img" alt="my_pic" class="img-fluid" loading="lazy"
+                            style="height: 350px; width: 275px; ">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <section id="portfolio" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center" style="margin-bottom: 5vh;"><b>Portfolio</b></h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card d-flex flex-column h-100">
-                        <img class="image" src="https://images.unsplash.com/photo-1581360742512-021d5b2157d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGhvc3BpdGFsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Project 1">
-                        <div class="card-body flex-grow-1">
-                            <h5 class="card-title">Project 1</h5>
-                            <p class="card-text">This is simple Hospital Management Registration page, when submitted it stores data in a MySQL database using PHP as a backend service.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://priyankmoon.github.io/registration-page/" class="btn btn-primary">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card d-flex flex-column h-100">
-                        <img class="image" src="https://images.unsplash.com/photo-1533421644343-45b606745fb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJhbmt8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="Project 2">
-                        <div class="card-body flex-grow-1">
-                            <h5 class="card-title">Project 2</h5>
-                            <p class="card-text">Bank Transaction System</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="https://priyankmoon.github.io/Bank-Transaction/" class="btn btn-primary">View Project</a>
+            <div class="container">
+                <h2 class="text-center" style="margin-bottom: 5vh;"><b>Portfolio</b></h2>
+                <div class="project-scroll-container">
+                    <div class="col-md-4 mb-4 project-card">
+                        <div class="card d-flex flex-column h-100">
+                            <img class="image"
+                                src="https://images.unsplash.com/photo-1581360742512-021d5b2157d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGhvc3BpdGFsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                                class="card-img-top" alt="Project 1">
+                            <div class="card-body flex-grow-1">
+                                <h5 class="card-title">Project 1</h5>
+                                <p class="card-text project-description">This is simple Hospital Management Registration
+                                    page, when submitted it
+                                    stores data in a MySQL database using PHP as a backend service.</p>
+                                <br>
+                            </div>
+                            <div class="card-footer">
+                                <a href="https://priyankmoon.github.io/registration-page/" class="btn btn-primary">View
+                                    Project</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card d-flex flex-column h-100">
-                        <img class="image" src="https://images.unsplash.com/photo-1598791318878-10e76d178023?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" class="card-img-top" alt="Project 3">
-                        <div class="card-body flex-grow-1">
-                            <h5 class="card-title">Project 3</h5>
-                            <p class="card-text">To-Do List</p>
+                    <div class="col-md-4 mb-4 project-card">
+                        <div class="card d-flex flex-column h-100">
+                            <img class="image"
+                                src="https://images.unsplash.com/photo-1533421644343-45b606745fb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJhbmt8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                                class="card-img-top" alt="Project 2">
+                            <div class="card-body flex-grow-1">
+                                <h5 class="card-title">Project 2</h5>
+                                <p class="card-text project-description">Bank Transaction System</p>
+                                <br>
+                            </div>
+                            <div class="card-footer">
+                                <a href="https://priyankmoon.github.io/Bank-Transaction/" class="btn btn-primary">View
+                                    Project</a>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <a href="https://priyankmoon.github.io/To-Do_List/" class="btn btn-primary">View Project</a>
+                    </div>
+                    <div class="col-md-4 mb-4 project-card">
+                        <div class="card d-flex flex-column h-100">
+                            <img class="image"
+                                src="https://images.unsplash.com/photo-1598791318878-10e76d178023?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                                class="card-img-top" alt="Project 3">
+                            <div class="card-body flex-grow-1">
+                                <h5 class="card-title">Project 3</h5>
+                                <p class="card-text project-description">To-Do List</p>
+                                <br>
+                            </div>
+                            <div class="card-footer">
+                                <a href="https://priyankmoon.github.io/To-Do_List/" class="btn btn-primary">View
+                                    Project</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
    <section id="programming-skills" class="py-5 " style="color: black;">
-        <div class="container" id="skills">
-            <h2 class="text-center">Programming Skills</h2>
-            <div class="row">
-                <div class="col-md-6" id="items">
-                    <h4>Languages</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item">C <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 90%"></div></li>
-                        <li class="list-group-item">C++ <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 60%"></div></li>
-                        <li class="list-group-item">Java <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 40%"></div></li>
-                    </ul>
+            <div class="container" id="skills">
+                <h2 class="text-center">Programming Skills</h2>
+                <div class="row">
+                    <div class="col-md-6" id="items">
+                        <h4>Languages</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">C <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 90%"></div>
+                            </li>
+                            <li class="list-group-item">C++ <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 60%"></div>
+                            </li>
+                            <li class="list-group-item">Java <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 40%"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" id="items">
+                        <h4>Frontend</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">HTML <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 75%"></div>
+                            </li>
+                            <li class="list-group-item">CSS <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 50%"></div>
+                            </li>
+                            <li class="list-group-item">Javascript <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 10%"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" id="items">
+                        <h4>Backend</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">PHP<div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 25%"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" id="items">
+                        <h4>DataBase</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">MySQL<div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 45%"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" id="items">
+                        <h4>Frameworks & Libraries</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">Bootstrap <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 45%"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" id="items">
+                        <h4>Technology</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">GitHub <div class="progress" role="progressbar"
+                                    aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 45%"></div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-md-6" id="items">
-                    <h4>Frontend</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item">HTML <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 75%"></div></li>
-                        <li class="list-group-item">CSS <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 50%"></div></li>
-                        <li class="list-group-item">Javascript <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 10%"></div></li>
-                    </ul>
+            </div>
+        </section>
+
+         <section id="certificates" class="py-5 bg-dark">
+            <div class="container">
+            <h2 class="text-center" style="color: white;">Certifications</h2>
+            <div class="container mt-4" style="text-align: center; align-items: center;">
+                <div class="col-md-6 d-flex align-items-center">
+                    <i class="gg-attachment" style="color: white;"></i>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="background-color: transparent; border: transparent;" data-bs-target="#imageModal1">SalesForce Certificate</button>
                 </div>
-                <div class="col-md-6" id="items">
-                    <h4>Backend</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item">PHP<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 25%"></div></li>
-                    </ul>
-                </div>
-                <div class="col-md-6" id="items">
-                    <h4>DataBase</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item">MySQL<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 45%"></div></li>
-                    </ul>
-                </div>
-                <div class="col-md-6" id="items">
-                    <h4>Frameworks & Libraries</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item">Bootstrap <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 45%"></div></li>
-                    </ul>
-                </div>
-                <div class="col-md-6" id="items">
-                    <h4>Technology</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item">GitHub <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: 45%"></div></li>
-                    </ul>
+                <br>
+                <div class="col-md-6 d-flex align-items-center">
+                    <i class="gg-attachment" style="color: white;"></i>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="background-color: transparent; border: transparent;" data-bs-target="#pdfModal1">Bharat-Intern Web Development Certificate</button>
                 </div>
             </div>
         </div>
-    </section>
+        </section>
+    
+        <div class="modal fade" id="imageModal1" tabindex="-1" aria-labelledby="imageModal1Label" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModal1Label">SalesForce Certificate</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Include your image here -->
+                        <img src="C:\Users\priya\OneDrive\Desktop\SalesForce.jpg" alt="SalesForce Certificate" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="pdfModal1" tabindex="-1" aria-labelledby="pdfModal1Label" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModal1Label">Bharat-Intern Web Development Certificate</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Include your PDF here using the object tag -->
+                        <object data="C:\Users\priya\OneDrive\Desktop\Priyank Moon_Certificate.pdf" type="application/pdf" width="100%" height="500px">
+                            <p>Your browser does not support embedded PDF files. You can download the PDF <a href="C:\Users\priya\OneDrive\Desktop\Priyank Moon_Certificate.pdf">here</a>.</p>
+                        </object>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <section id="contact" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-start" style="text-align: center;">Contact Me</h2>
-            <div class="row" style="margin:40px 0 0 0 ;">
-                <div class="col-md-6">
-                    <form action="https://formspree.io/f/mvojkyej" method="POST"
-                        style="border: 3px solid rgb(130, 128, 128); border-radius: 50px; padding: 20px 20px 20px 20px ;">
-                        <div class="form-group" style="-webkit-text-size-adjust: 100%;">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" autocomplete="off"
-                                placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" autocomplete="off"
-                                placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Subject</label>
-                            <input type="text" class="form-control" id="title" name="Subject" autocomplete="off"
-                                placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea class="form-control" id="message" rows="4" name="message" autocomplete="off"
-                                placeholder="Your Message" required min="5"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
+            <div class="container">
+                <h2 class="text-start" style="text-align: center;">Contact Me</h2>
+                <div class="row" style="margin:40px 0 0 0 ;">
+                    <div class="col-md-6">
+                        <form action="https://formspree.io/f/mvojkyej" method="POST"
+                            style="border: 3px solid rgb(130, 128, 128); border-radius: 50px; padding: 20px 20px 20px 20px ;">
+                            <div class="form-group" style="-webkit-text-size-adjust: 100%;">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" autocomplete="off"
+                                    placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" autocomplete="off"
+                                    placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Subject</label>
+                                <input type="text" class="form-control" id="title" name="Subject" autocomplete="off"
+                                    placeholder="Subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea class="form-control" id="message" rows="4" name="message" autocomplete="off"
+                                    placeholder="Your Message" required min="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
 
     <section id="social" class="py-5 bg-dark">
-        <div class="container">
-            <h2 class="text-center text-white mb-4">Connect with Me</h2>
-            <div class="d-flex justify-content-center">
-                <div class="p-2">
-                    <a href="https://in.linkedin.com/in/priyank-moon-3b4bab227" target="_blank" class="social-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png"
-                             alt="LinkedIn" class="img-fluid" style="max-width: 70px; border-radius: 50%;">
-                    </a>
-                    <p class="text-white text-center">LinkedIn</p>
-                </div>
-                <div class="p-2">
-                    <a href="https://github.com/PriyankMoon" target="_blank" class="social-icon">
-                        <img src="https://pngimg.com/uploads/github/github_PNG40.png"
-                            alt="Twitter" class="img-fluid" id="twits" style="max-width: 70px;">
-                    </a>
-                    <p class="text-white text-center">GitHub</p>
-                </div>
-                <div class="p-2">
-                    <a href="https://instagram.com/_priyank_moon_124?utm_source=qr&igshid=NGExMmI2YTkyZg%3D%3D" target="_blank" class="social-icon">
-                        <img src="https://icon-library.com/images/instagram-logo-icon-png/instagram-logo-icon-png-10.jpg"
-                            alt="Instagram" class="img-fluid" style="max-width: 70px;">
-                    </a>
-                    <p class="text-white text-center">Instagram</p>
+            <div class="container">
+                <h2 class="text-center text-white mb-4">Connect with Me</h2>
+                <div class="d-flex justify-content-center">
+                    <div class="p-2">
+                        <a href="https://in.linkedin.com/in/priyank-moon-3b4bab227" target="_blank" class="social-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png"
+                                alt="LinkedIn" class="img-fluid"
+                                style="max-width: 70px; scale: 0.70; border-radius: 50%;">
+                        </a>
+                        <p class="text-white text-center">LinkedIn</p>
+                    </div>
+                    <div class="p-2">
+                        <a href="https://github.com/PriyankMoon" target="_blank" class="social-icon">
+                            <img src="https://pngimg.com/uploads/github/github_PNG40.png" alt="Twitter"
+                                class="img-fluid" id="twits" style="max-width: 70px; scale: 0.70;">
+                        </a>
+                        <p class="text-white text-center">GitHub</p>
+                    </div>
+                    <div class="p-2">
+                        <a href="https://instagram.com/_priyank_moon_124?utm_source=qr&igshid=NGExMmI2YTkyZg%3D%3D"
+                            target="_blank" class="social-icon">
+                            <img src="https://icon-library.com/images/instagram-logo-icon-png/instagram-logo-icon-png-10.jpg"
+                                alt="Instagram" class="img-fluid" style="max-width: 70px; scale: 0.70;">
+                        </a>
+                        <p class="text-white text-center">Instagram</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
     <footer class="bg-primary  py-3" style="color:white">
-        <div class="container text-center">
-            &copy; 2023 Priyank Moon. All Rights Reserved.
-        </div>
-    </footer>
-
+            <div class="text-center">
+                &copy; 2023 Priyank Moon. All Rights Reserved.
+            </div>
+        </footer>
+         
+     </div>
     <!-- Bootstrap JS scripts (optional, for certain components) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -343,30 +905,80 @@
 
     </script>
 
+
+
     <script>
-    $(document).ready(function () {
-        // Smooth scrolling for all links with the 'nav-link' class
-        $(".nav-link").on("click", function (event) {
-            if (this.hash !== "") {
-                event.preventDefault();
+        // Hide the content in the main element
+        document.querySelector('.main').style.display = 'none';
 
-                var hash = this.hash;
+        // Delay for 3.5 seconds and then make it visible
+        setTimeout(function () {
+            document.querySelector('.main').style.display = 'block';
+        }, 3500);
+    </script>
 
-                // Calculate the offset of the target element
-                var targetOffset = $(hash).offset().top;
+    <script>
+        // Hide the navbar
+        document.querySelector('.navbar').style.visibility = 'hidden';
 
-                // Animate the scroll with a sliding effect
-                $("html, body").animate(
-                    {
-                        scrollTop: targetOffset,
-                    },
-                    800, // Adjust the duration as needed (in milliseconds)
-                    "swing" // You can change the easing function if desired
-                );
-            }
+        // Delay for 3.4 seconds and then make it visible
+        setTimeout(function () {
+            document.querySelector('.navbar').style.visibility = 'visible';
+        }, 3400);
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            // Smooth scrolling for all links with the 'nav-link' class
+            $(".nav-link").on("click", function (event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+
+                    var hash = this.hash;
+
+                    // Calculate the offset of the target element
+                    var targetOffset = $(hash).offset().top;
+
+                    // Animate the scroll with a sliding effect
+                    $("html, body").animate(
+                        {
+                            scrollTop: targetOffset,
+                        },
+                        800, // Adjust the duration as needed (in milliseconds)
+                        "swing" // You can change the easing function if desired
+                    );
+                }
+            });
         });
-    });
-</script>
+    </script>
+
+    <script>
+        // Function to check if an element is in the viewport
+        function isElementInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Function to handle scroll events
+        function handleScroll() {
+            const elements = document.querySelectorAll('.animate-left');
+
+            elements.forEach((element) => {
+                if (isElementInViewport(element) && !element.classList.contains('animated')) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Add an event listener to handle scroll events
+        window.addEventListener('scroll', handleScroll);
+    </script>
 
 </body>
 
